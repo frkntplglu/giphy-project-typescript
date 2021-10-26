@@ -9,7 +9,7 @@ interface IFavListItem{
 const FavListItem:FC<IFavListItem> = ({photo, removeFromFav}) => {
     return (
         <li className="fav-list-item">
-            <figure className="fav-list-item-image"><button onClick={() => removeFromFav(photo)}><i className="fas fa-trash"></i></button><img src={photo} alt="Fav" /></figure>
+            <figure className="fav-list-item-image"><button className="btn-primary" onClick={() => removeFromFav(photo)}><i className="fas fa-trash"></i></button><img src={photo} alt="Fav" /></figure>
         </li>
     )
 }
