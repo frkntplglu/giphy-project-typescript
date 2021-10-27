@@ -21,7 +21,6 @@ const Home: FC<IHomeProps> = ({gifs}) => {
 
     const removeFromFav = (photo: string): void => {
         const newFavList = favList.filter(favPhoto => favPhoto !== photo);
-        console.log(newFavList)
         setFavList(newFavList);
         saveToStorage("favPhotos", newFavList);
     }
