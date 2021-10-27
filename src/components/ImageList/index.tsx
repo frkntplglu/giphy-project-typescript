@@ -8,7 +8,7 @@ interface IGifsProps {
     addToFav: (photo: string) => void
 }
 
-const ImageList: FC<IGifsProps> = ({gifs, addToFav}) => {
+const ImageList: FC<IGifsProps> = React.memo(({gifs, addToFav}) => {
     return (
         <div className="image-list">
             {
@@ -16,6 +16,6 @@ const ImageList: FC<IGifsProps> = ({gifs, addToFav}) => {
             }
         </div>
     )
-}
+})
 
 export default ImageList

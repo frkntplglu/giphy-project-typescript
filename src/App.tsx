@@ -8,8 +8,9 @@ function App() {
   const [query, setQuery] = useState("");
   const [input, setInput] = useState<string>("");
   const [select, setSelect] = useState<string>("");
+  const [isSearch, setIsSearch] = useState<boolean>(false);
 
-  const {list, resetList} = useFetch(query, offset);
+  const {list} = useFetch(query, offset, isSearch);
 
   const loadRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
@@ -28,19 +29,30 @@ function App() {
           alert("Query cannot be smaller than 3 characters");
           return;
       }
-      resetList();
+
+      if(select === "0" && input.length === 0){
+        alert("Please type or select a query");
+        return;
+      }
+
+      setIsSearch(true);
       setOffset(0);
+
       if(select === "0"){
         setQuery(input);
       }else{
         setQuery(select);
       }
+      
+      
+      setInput("");
+      setSelect("0");
   }
 
   const handleObserver = useCallback((entries) => {
     const target = entries[0];
     if (target.isIntersecting ) {
-      console.log("intersected")
+      setIsSearch(false);
       setOffset((prev) => prev + 25);
     }
   }, []);

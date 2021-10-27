@@ -3,16 +3,13 @@ import {GifData, GifType} from "../types"
 import api from "../services/api";
 
 
-function useFetch(query: string, offset: number) {
+function useFetch(query: string, offset: number, isSearch: boolean) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [list, setList] = useState<GifType[]>([]);
 
-  const resetList = () => {
-    setList([])
-  }
-
   const sendQuery = useCallback(async () => {
+    if(isSearch) setList([])
     try {
       if(query !== ""){
         setLoading(true);
@@ -25,13 +22,13 @@ function useFetch(query: string, offset: number) {
     } catch (err) {
       setError(true);
     }
-  }, [query, offset]);
+  }, [query, offset, isSearch]);
 
   useEffect(() => {
     sendQuery();
   }, [query, sendQuery, offset]);
 
-  return { loading, error, list, resetList };
+  return { loading, error, list };
 }
 
 export default useFetch;
